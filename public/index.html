@@ -27,6 +27,9 @@
             messageDiv.innerText = message;
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            if (sender === 'bot') {
+                speakMessage(message);
+            }
         }
 
         function sendMessage() {
@@ -49,6 +52,12 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+        }
+
+        function speakMessage(message) {
+            const utterance = new SpeechSynthesisUtterance(message);
+            utterance.lang = 'es-ES';
+            window.speechSynthesis.speak(utterance);
         }
     </script>
 </body>
